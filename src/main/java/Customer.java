@@ -21,7 +21,7 @@ public class Customer {
         double totalAmount = 0;
         int frequentRenterPoints = 0;
         Enumeration<Rental> rentals = this.rentals.elements();
-        String result = "Rental Record for " + getName() + "\n";
+        StringBuilder result = new StringBuilder("Rental Record for " + getName() + "\n");
 
         while (rentals.hasMoreElements()) {
             double thisAmount = 0;
@@ -50,16 +50,22 @@ public class Customer {
                     && each.getDaysRented() > 1)
                 frequentRenterPoints++;
 
-            result += "\t" + each.getMovie().getTitle() + "\t"
-                    + String.valueOf(thisAmount) + "\n";
+            result.append("\t");
+            result.append(each.getMovie().getTitle());
+            result.append("\t");
+            result.append(thisAmount);
+            result.append("\n");
             totalAmount += thisAmount;
-
         }
 
-        result += "You owed " + String.valueOf(totalAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points\n";
+        result.append("You owed ");
+        result.append(totalAmount);
+        result.append("\n");
+        result.append("You earned ");
+        result.append(frequentRenterPoints);
+        result.append(" frequent renter points\n");
 
 
-        return result;
+        return result.toString();
     }
 }
