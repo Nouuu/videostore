@@ -3,16 +3,19 @@ import java.util.Vector;
 
 public class CustomerStatement {
     private final Vector<Rental> rentals;
+    private double totalAmount;
+    int frequentRenterPoints;
+    StringBuilder result;
 
     public CustomerStatement(Vector<Rental> rentals) {
         this.rentals = rentals;
     }
 
     public String statement(String customerName) {
-        double totalAmount = 0;
-        int frequentRenterPoints = 0;
+        totalAmount = 0;
+        frequentRenterPoints = 0;
         Enumeration<Rental> rentals = this.rentals.elements();
-        StringBuilder result = new StringBuilder("Rental Record for " + customerName + "\n");
+        result = new StringBuilder("Rental Record for " + customerName + "\n");
 
         while (rentals.hasMoreElements()) {
             double thisAmount = 0;
