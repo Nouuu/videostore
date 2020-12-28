@@ -1,5 +1,4 @@
 import java.util.Vector;
-import java.util.Enumeration;
 
 public class Customer {
     private final String name;
@@ -19,6 +18,6 @@ public class Customer {
     }
 
     public String statement() {
-        return customerStatement.statement(getName());
+        return customerStatement.rentalStatement(getName());
     }
 }

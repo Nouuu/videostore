@@ -11,7 +11,7 @@ public class CustomerStatement {
         this.rentals = rentals;
     }
 
-    public String statement(String customerName) {
+    public String rentalStatement(String customerName) {
         totalAmount = 0;
         frequentRenterPoints = 0;
         Enumeration<Rental> rentals = this.rentals.elements();
@@ -23,7 +23,7 @@ public class CustomerStatement {
         }
 
         appendFrequentRenterPoints();
-        
+
         return result.toString();
     }
 
