@@ -48,16 +48,22 @@ public class CustomerStatement {
         frequentRenterPoints++;
 
         if (rental.getMovie().getPriceCode().equals(MovieType.NEW_RELEASE)
-                && rental.getDaysRented() > 1)
+                && rental.getDaysRented() > 1) {
             frequentRenterPoints++;
+        }
 
-        result.append("\t");
-        result.append(rental.getMovie().getTitle());
-        result.append("\t");
-        result.append(thisAmount);
-        result.append("\n");
+        appendRentalDetails(rental.getMovie().getTitle(), thisAmount);
         totalAmount += thisAmount;
     }
+
+    private void appendRentalDetails(String movieTitle, double amount) {
+        result.append("\t");
+        result.append(movieTitle);
+        result.append("\t");
+        result.append(amount);
+        result.append("\n");
+    }
+
 
     private void appendFrequentRenterPoints() {
         result.append("You owed ");
@@ -66,6 +72,5 @@ public class CustomerStatement {
         result.append("You earned ");
         result.append(frequentRenterPoints);
         result.append(" frequent renter points\n");
-
     }
 }
