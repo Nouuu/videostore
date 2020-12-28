@@ -18,13 +18,15 @@ public class CustomerStatement {
         result = new StringBuilder("Rental Record for " + customerName + "\n");
 
         while (rentals.hasMoreElements()) {
-            double thisAmount = 0;
-            Rental each = rentals.nextElement();
-
             // determines the amount for each line
-            switch (each.getMovie().getPriceCode()) {
-                case REGULAR:
-                    thisAmount += 2;
+            processRental(rentals.nextElement());
+        }
+
+        appendFrequentRenterPoints();
+        
+        return result.toString();
+    }
+
     private void processRental(Rental rental) {
         double thisAmount = 0;
         switch (rental.getMovie().getPriceCode()) {
@@ -57,6 +59,7 @@ public class CustomerStatement {
         totalAmount += thisAmount;
     }
 
+    private void appendFrequentRenterPoints() {
         result.append("You owed ");
         result.append(totalAmount);
         result.append("\n");
@@ -64,7 +67,5 @@ public class CustomerStatement {
         result.append(frequentRenterPoints);
         result.append(" frequent renter points\n");
 
-
-        return result.toString();
     }
 }
