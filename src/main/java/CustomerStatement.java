@@ -25,32 +25,37 @@ public class CustomerStatement {
             switch (each.getMovie().getPriceCode()) {
                 case REGULAR:
                     thisAmount += 2;
-                    if (each.getDaysRented() > 2)
-                        thisAmount += (each.getDaysRented() - 2) * 1.5;
-                    break;
-                case NEW_RELEASE:
-                    thisAmount += each.getDaysRented() * 3;
-                    break;
-                case CHILDRENS:
-                    thisAmount += 1.5;
-                    if (each.getDaysRented() > 3)
-                        thisAmount += (each.getDaysRented() - 3) * 1.5;
-                    break;
-            }
+    private void processRental(Rental rental) {
+        double thisAmount = 0;
+        switch (rental.getMovie().getPriceCode()) {
+            case REGULAR:
+                thisAmount += 2;
+                if (rental.getDaysRented() > 2)
+                    thisAmount += (rental.getDaysRented() - 2) * 1.5;
+                break;
+            case NEW_RELEASE:
+                thisAmount += rental.getDaysRented() * 3;
+                break;
+            case CHILDRENS:
+                thisAmount += 1.5;
+                if (rental.getDaysRented() > 3)
+                    thisAmount += (rental.getDaysRented() - 3) * 1.5;
+                break;
+        }
 
+        frequentRenterPoints++;
+
+        if (rental.getMovie().getPriceCode().equals(MovieType.NEW_RELEASE)
+                && rental.getDaysRented() > 1)
             frequentRenterPoints++;
 
-            if (each.getMovie().getPriceCode().equals(MovieType.NEW_RELEASE)
-                    && each.getDaysRented() > 1)
-                frequentRenterPoints++;
-
-            result.append("\t");
-            result.append(each.getMovie().getTitle());
-            result.append("\t");
-            result.append(thisAmount);
-            result.append("\n");
-            totalAmount += thisAmount;
-        }
+        result.append("\t");
+        result.append(rental.getMovie().getTitle());
+        result.append("\t");
+        result.append(thisAmount);
+        result.append("\n");
+        totalAmount += thisAmount;
+    }
 
         result.append("You owed ");
         result.append(totalAmount);
