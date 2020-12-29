@@ -9,8 +9,9 @@ public class Customer {
         this.name = name;
     }
 
-    public void addRental(Rental rental) {
+    public Customer addRental(Rental rental) {
         rentals.addElement(rental);
+        return this;
     }
 
     public String getName() {
