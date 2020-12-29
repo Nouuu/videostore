@@ -12,11 +12,7 @@ public class CustomerStatement {
     }
 
     public String rentalStatement(String customerName) {
-        totalAmount = 0;
-        frequentRenterPoints = 0;
-        Enumeration<Rental> rentals = this.rentals.elements();
-
-        result = new StringBuilder("Rental Record for " + customerName + "\n");
+        Enumeration<Rental> rentals = newRentalStatement(customerName);
 
         while (rentals.hasMoreElements()) {
             processRental(rentals.nextElement());
@@ -27,8 +23,15 @@ public class CustomerStatement {
         return result.toString();
     }
 
+    private Enumeration<Rental> newRentalStatement(String customerName) {
+        totalAmount = 0;
+        frequentRenterPoints = 0;
+        result = new StringBuilder("Rental Record for " + customerName + "\n");
+
+        return this.rentals.elements();
+    }
+
     private void processRental(Rental rental) {
-        // determines the amount for each line
         double thisAmount = getRentalAmount(rental);
 
         addFrequentRenterPoints();
