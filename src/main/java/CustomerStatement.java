@@ -34,19 +34,10 @@ public class CustomerStatement {
     private void processRental(Rental rental) {
         double thisAmount = getRentalAmount(rental);
 
-        addFrequentRenterPoints();
-
-        addBonusFrequentRenterPoints(rental);
+        frequentRenterPoints += getFrequentRenterPoints(rental);
 
         appendRentalDetails(rental.getMovie().getTitle(), thisAmount);
         totalAmount += thisAmount;
-    }
-
-    private void addBonusFrequentRenterPoints(Rental rental) {
-        if (rental.getMovie().getPriceCode().equals(MovieType.NEW_RELEASE)
-                && rental.getDaysRented() > 1) {
-            addFrequentRenterPoints();
-        }
     }
 
     private double getRentalAmount(Rental rental) {
@@ -90,7 +81,9 @@ public class CustomerStatement {
                 .append(" frequent renter points\n");
     }
 
-    private void addFrequentRenterPoints() {
-        frequentRenterPoints++;
-    }
-}
+    private int getFrequentRenterPoints(Rental rental) {
+        if (rental.getMovie().getPriceCode().equals(MovieType.NEW_RELEASE) && rental.getDaysRented() > 1) {
+            return 2;
+        }
+        return 1;
+    }}
