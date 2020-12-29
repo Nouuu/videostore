@@ -15,10 +15,10 @@ public class CustomerStatement {
         totalAmount = 0;
         frequentRenterPoints = 0;
         Enumeration<Rental> rentals = this.rentals.elements();
+
         result = new StringBuilder("Rental Record for " + customerName + "\n");
 
         while (rentals.hasMoreElements()) {
-            // determines the amount for each line
             processRental(rentals.nextElement());
         }
 
@@ -28,22 +28,8 @@ public class CustomerStatement {
     }
 
     private void processRental(Rental rental) {
-        double thisAmount = 0;
-        switch (rental.getMovie().getPriceCode()) {
-            case REGULAR:
-                thisAmount += 2;
-                if (rental.getDaysRented() > 2)
-                    thisAmount += (rental.getDaysRented() - 2) * 1.5;
-                break;
-            case NEW_RELEASE:
-                thisAmount += rental.getDaysRented() * 3;
-                break;
-            case CHILDRENS:
-                thisAmount += 1.5;
-                if (rental.getDaysRented() > 3)
-                    thisAmount += (rental.getDaysRented() - 3) * 1.5;
-                break;
-        }
+        // determines the amount for each line
+        double thisAmount = getRentalAmount(rental);
 
         frequentRenterPoints++;
 
@@ -54,6 +40,30 @@ public class CustomerStatement {
 
         appendRentalDetails(rental.getMovie().getTitle(), thisAmount);
         totalAmount += thisAmount;
+    }
+
+    private double getRentalAmount(Rental rental) {
+        switch (rental.getMovie().getPriceCode()) {
+            case REGULAR:
+                return getRegularRentalAmount(rental.getDaysRented());
+            case NEW_RELEASE:
+                return getNewReleaseRentalAmount(rental.getDaysRented());
+            case CHILDRENS:
+                return getChildrenRentalAmount(rental.getDaysRented());
+        }
+        return -1;
+    }
+
+    private double getRegularRentalAmount(int daysRented) {
+        return 2 + (daysRented > 2 ? (daysRented - 2) * 1.5 : 0);
+    }
+
+    private double getNewReleaseRentalAmount(int daysRented) {
+        return daysRented * 3;
+    }
+
+    private double getChildrenRentalAmount(int daysRented) {
+        return 1.5 + (daysRented > 3 ? (daysRented - 3) * 1.5 : 0);
     }
 
     private void appendRentalDetails(String movieTitle, double amount) {
