@@ -31,11 +31,11 @@ public class CustomerStatement {
         // determines the amount for each line
         double thisAmount = getRentalAmount(rental);
 
-        frequentRenterPoints++;
+        addFrequentRenterPoints();
 
         if (rental.getMovie().getPriceCode().equals(MovieType.NEW_RELEASE)
                 && rental.getDaysRented() > 1) {
-            frequentRenterPoints++;
+            addFrequentRenterPoints();
         }
 
         appendRentalDetails(rental.getMovie().getTitle(), thisAmount);
@@ -74,7 +74,6 @@ public class CustomerStatement {
         result.append("\n");
     }
 
-
     private void appendFrequentRenterPoints() {
         result.append("You owed ");
         result.append(totalAmount);
@@ -82,5 +81,9 @@ public class CustomerStatement {
         result.append("You earned ");
         result.append(frequentRenterPoints);
         result.append(" frequent renter points\n");
+    }
+
+    private void addFrequentRenterPoints() {
+        frequentRenterPoints++;
     }
 }
