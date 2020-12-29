@@ -5,6 +5,38 @@ import junit.framework.*;
 public class VideoStoreTest extends TestCase {
     private Customer customer;
 
+    private final Rental newMovieRental1 = new Rental(new Movie("New1", MovieType.NEW_RELEASE), 3);
+    private final Rental newMovieRental2 = new Rental(new Movie("New2", MovieType.NEW_RELEASE), 3);
+
+    private final Rental newChildrenRental1 = new Rental(new Movie("Children1", MovieType.CHILDRENS), 3);
+
+    private final Rental newRegularMovie1 = new Rental(new Movie("Regular1", MovieType.REGULAR), 1);
+    private final Rental newRegularMovie2 = new Rental(new Movie("Regular2", MovieType.REGULAR), 2);
+    private final Rental newRegularMovie3 = new Rental(new Movie("Regular3", MovieType.REGULAR), 3);
+
+    private final String expectedStatement1 = "Rental Record for Fred\n" +
+            "\tNew1" + "\t9.0\n" +
+            "You owed 9.0\n" +
+            "You earned 2 frequent renter points\n";
+
+    private final String expectedStatement2 = "Rental Record for Fred\n" +
+            "\tNew1" + "\t9.0\n" +
+            "\tNew2" + "\t9.0\n" +
+            "You owed 18.0\n" +
+            "You earned 4 frequent renter points\n";
+
+    private final String expectedStatement3 = "Rental Record for Fred\n" +
+            "\tChildren1" + "\t1.5\n" +
+            "You owed 1.5\n" +
+            "You earned 1 frequent renter points\n";
+
+    private final String expectedStatement4 = "Rental Record for Fred\n" +
+            "\tRegular1" + "\t2.0\n" +
+            "\tRegular2" + "\t2.0\n" +
+            "\tRegular3" + "\t3.5\n" +
+            "You owed 7.5\n" +
+            "You earned 3 frequent renter points\n";
+
     public VideoStoreTest(String name) {
         super(name);
     }
@@ -14,26 +46,29 @@ public class VideoStoreTest extends TestCase {
     }
 
     public void testSingleNewReleaseStatement() {
-        customer.addRental(new Rental(new Movie("The Cell", MovieType.NEW_RELEASE), 3));
-        assertEquals("Rental Record for Fred\n\tThe Cell\t9.0\nYou owed 9.0\nYou earned 2 frequent renter points\n", customer.statement());
+        customer.addRental(newMovieRental1);
+
+        assertEquals(expectedStatement1, customer.statement());
     }
 
     public void testDualNewReleaseStatement() {
-        customer.addRental(new Rental(new Movie("The Cell", MovieType.NEW_RELEASE), 3));
-        customer.addRental(new Rental(new Movie("The Tigger Movie", MovieType.NEW_RELEASE), 3));
-        assertEquals("Rental Record for Fred\n\tThe Cell\t9.0\n\tThe Tigger Movie\t9.0\nYou owed 18.0\nYou earned 4 frequent renter points\n", customer.statement());
+        customer.addRental(newMovieRental1);
+        customer.addRental(newMovieRental2);
+
+        assertEquals(expectedStatement2, customer.statement());
     }
 
     public void testSingleChildrensStatement() {
-        customer.addRental(new Rental(new Movie("The Tigger Movie", MovieType.CHILDRENS), 3));
-        assertEquals("Rental Record for Fred\n\tThe Tigger Movie\t1.5\nYou owed 1.5\nYou earned 1 frequent renter points\n", customer.statement());
+        customer.addRental(newChildrenRental1);
+
+        assertEquals(expectedStatement3, customer.statement());
     }
 
     public void testMultipleRegularStatement() {
-        customer.addRental(new Rental(new Movie("Plan 9 from Outer Space", MovieType.REGULAR), 1));
-        customer.addRental(new Rental(new Movie("8 1/2", MovieType.REGULAR), 2));
-        customer.addRental(new Rental(new Movie("Eraserhead", MovieType.REGULAR), 3));
+        customer.addRental(newRegularMovie1);
+        customer.addRental(newRegularMovie2);
+        customer.addRental(newRegularMovie3);
 
-        assertEquals("Rental Record for Fred\n\tPlan 9 from Outer Space\t2.0\n\t8 1/2\t2.0\n\tEraserhead\t3.5\nYou owed 7.5\nYou earned 3 frequent renter points\n", customer.statement());
+        assertEquals(expectedStatement4, customer.statement());
     }
 }
