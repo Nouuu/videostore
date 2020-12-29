@@ -74,20 +74,20 @@ public class CustomerStatement {
     }
 
     private void appendRentalDetails(String movieTitle, double amount) {
-        result.append("\t");
-        result.append(movieTitle);
-        result.append("\t");
-        result.append(amount);
-        result.append("\n");
+        result.append("\t")
+                .append(movieTitle)
+                .append("\t")
+                .append(amount)
+                .append("\n");
     }
 
     private void appendFrequentRenterPoints() {
-        result.append("You owed ");
-        result.append(totalAmount);
-        result.append("\n");
-        result.append("You earned ");
-        result.append(frequentRenterPoints);
-        result.append(" frequent renter points\n");
+        result.append("You owed ")
+                .append(totalAmount)
+                .append("\n")
+                .append("You earned ")
+                .append(frequentRenterPoints)
+                .append(" frequent renter points\n");
     }
 
     private void addFrequentRenterPoints() {
