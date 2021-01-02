@@ -1,17 +1,17 @@
 import java.util.Enumeration;
 import java.util.Vector;
 
-public class CustomerStatement {
+public class RentalStatement {
     private final Vector<Rental> rentals;
     private double totalAmount;
     int frequentRenterPoints;
     StringBuilder result;
 
-    public CustomerStatement(Vector<Rental> rentals) {
+    public RentalStatement(Vector<Rental> rentals) {
         this.rentals = rentals;
     }
 
-    public String rentalStatement(String customerName) {
+    public String getRentalStatement(String customerName) {
         Enumeration<Rental> rentals = newRentalStatement(customerName);
 
         while (rentals.hasMoreElements()) {
