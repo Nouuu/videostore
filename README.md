@@ -3,6 +3,15 @@ Video Store
 
 > *The videostore example from Martin Fowler's Refactoring, and from Episode 3 of cleancoders.com*
 
+<!-- toc -->
+
+- [Auteur](#auteur)
+- [Statistiques](#statistiques)
+- [Descriptif](#descriptif)
+- [Dépot github](#dépot-github)
+
+<!-- tocstop -->
+
 # Auteur
 
 [Noé LARRIEU-LACOSTE](https://github.com/Nouuu)  ![followers](https://img.shields.io/github/followers/nouuu)
