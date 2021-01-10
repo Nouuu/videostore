@@ -16,6 +16,8 @@ Video Store
 
 [Noé LARRIEU-LACOSTE](https://github.com/Nouuu)  ![followers](https://img.shields.io/github/followers/nouuu)
 
+Classe 3AL2
+
 # Statistiques
 
 Cette partie, au tout début du README.md, devra résumer le nombre de code smells détectés ainsi que le nombre de
