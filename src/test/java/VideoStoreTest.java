@@ -52,8 +52,8 @@ public class VideoStoreTest extends TestCase {
     }
 
     public void testDualNewReleaseStatement() {
-        customer.addRental(newMovieRental1);
-        customer.addRental(newMovieRental2);
+        customer.addRental(newMovieRental1)
+                .addRental(newMovieRental2);
 
         assertEquals(expectedStatement2, customer.statement());
     }
@@ -65,9 +65,9 @@ public class VideoStoreTest extends TestCase {
     }
 
     public void testMultipleRegularStatement() {
-        customer.addRental(newRegularMovie1);
-        customer.addRental(newRegularMovie2);
-        customer.addRental(newRegularMovie3);
+        customer.addRental(newRegularMovie1)
+                .addRental(newRegularMovie2)
+                .addRental(newRegularMovie3);
 
         assertEquals(expectedStatement4, customer.statement());
     }
