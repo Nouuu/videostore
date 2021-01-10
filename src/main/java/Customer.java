@@ -3,7 +3,7 @@ import java.util.Vector;
 public class Customer {
     private final String name;
     private final Vector<Rental> rentals = new Vector<>();
-    private final CustomerStatement customerStatement = new CustomerStatement(rentals);
+    private final RentalStatement rentalStatement = new RentalStatement(rentals);
 
     public Customer(String name) {
         this.name = name;
@@ -19,6 +19,6 @@ public class Customer {
     }
 
     public String statement() {
-        return customerStatement.rentalStatement(getName());
+        return rentalStatement.getRentalStatement(getName());
     }
 }
