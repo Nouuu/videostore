@@ -46,3 +46,7 @@ Cette partie contiendra un tableau (ou une liste) avec, pour chaque ligne :
 |                                                              | La méthode `addRental`dans a classe `Customer`retourne désormais lui même `this` | Permettra d'ajouter des `Rental` à la chaine de cette manière<br />![image-20210110164918367](images/README/image-20210110164918367.png) |
 | Les tests unitaire sont un peu en désordre et mériterais une meilleure lisibilité, flexibilité | Refactorisation des tests unitaires, les tests restent les mêmes mais tout les paramètres spécifiques utilisés sont maintenant déclarés au début des tests et sont hautement personnalisables | Cela évite la confusion, et de recréer un objet à chaque tests alors que certains utilisent les mêmes objets |
 
+# Dépot github
+
+https://github.com/Nouuu/videostore
+
